@@ -27,8 +27,8 @@ export class MyApp {
             }, (error) => {
                 console.error("Unable to open database", error);
             });
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+       statusBar.styleDefault();
+       splashScreen.hide();
+     });
   }
 }

@@ -36,7 +36,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     SQLite,
-    SQLiteObject ,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
