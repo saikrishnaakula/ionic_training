@@ -6,34 +6,39 @@
 
 <ion-content padding>
   <ion-grid>
-  <ion-row>
-    <ion-col col-12>
-      <ion-item>
-  <ion-label floating>Frist Name</ion-label>
-  <ion-input type="text" [(ngModel)]="name.fname"></ion-input>
-</ion-item>
+    <ion-row>
+      <ion-col col-12>
+        <ion-item>
+          <ion-label floating>Frist Name</ion-label>
+          <ion-input type="text" [(ngModel)]="name.fname"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>  <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input type="text" [(ngModel)]="name.lname"></ion-input>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col col-12>  <ion-item>
-    <ion-label floating>Last Name</ion-label>
-    <ion-input type="text" [(ngModel)]="name.lname"></ion-input>
-  </ion-item>
-</ion-col>
-  </ion-row>
-  <ion-row>
     <ion-col col-12>
-      <button ion-button (tap) = "saveName()">Save</button>
-</ion-col>
+      <button ion-button full (tap) = "saveName()"><ion-icon float-left name="add"> Save</ion-icon></button>
+    </ion-col>
   </ion-row>
   <ion-row>
     <ion-col col-12>
       <ion-list>
-  <button ion-item *ngFor="let item of people">
-    {{ item.firstname +" "+item.lastname }}
-  </button>
-</ion-list>
-</ion-col>
+        <ion-list-header>
+          Names
+        </ion-list-header>
+        <ion-item *ngFor="let item of people">
+          {{ item.firstname +" "+item.lastname }}
+          <button ion-button clear item-end (tap) = "editName(item.id)" >Edit</button>
+          <button ion-button clear item-end (tap) = "rmName(item.id)" >Delete</button>
+        </ion-item>
+      </ion-list>
+    </ion-col>
   </ion-row>
 </ion-grid>
 </ion-content>
