@@ -21,20 +21,8 @@ export class HomePage {
     });
   }
   public saveName(){
-    var sql = "";
-    var param =[];
-    if(this.name.fname.length !=0 && this.name.lname.length !=0){
-      sql = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
-      param = [this.name.fname, this.name.lname];
-    } else if(this.name.fname.length!=0 && this.name.lname.length ==0){
-      sql = "INSERT INTO people (firstname) VALUES (?)";
-      param = [this.name.fname];
-    } else if(this.name.fname.length ==0 && this.name.lname.length !=0){
-      sql = "INSERT INTO people (lastname) VALUES (?)";
-      param = [this.name.lname];
-    } else{
-      return;
-    }
+    var sql = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
+    var param = [this.name.fname, this.name.lname];
     this.sqlite.create({
       name: 'test.db',
       location: 'default'
