@@ -13,29 +13,28 @@ export class HomePage {
   people =[];
   constructor(public platform: Platform,public navCtrl: NavController,private sqlite: SQLite,public alertCtrl: AlertController) {
     this.platform.ready().then(() => {
-            this.sqlite.create({name: "test.db", location: "default"}).then(() => {
-                this.refresh();
-            }, (error) => {
-                console.log("ERROR: ", error);
-            });
-        });
+      this.sqlite.create({name: "test.db", location: "default"}).then(() => {
+        this.refresh();
+      }, (error) => {
+        console.log("ERROR: ", error);
+      });
+    });
   }
   public saveName(){
     var sql = "";
     var param =[];
-
     if(this.name.fname.length !=0 && this.name.lname.length !=0){
-    sql = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
-    param = [this.name.fname, this.name.lname];
-  } else if(this.name.fname.length!=0 && this.name.lname.length ==0){
-    sql = "INSERT INTO people (firstname) VALUES (?)";
-    param = [this.name.fname];
-  } else if(this.name.fname.length ==0 && this.name.lname.length !=0){
-    sql = "INSERT INTO people (lastname) VALUES (?)";
-    param = [this.name.lname];
-  } else{
-    return;
-  }
+      sql = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
+      param = [this.name.fname, this.name.lname];
+    } else if(this.name.fname.length!=0 && this.name.lname.length ==0){
+      sql = "INSERT INTO people (firstname) VALUES (?)";
+      param = [this.name.fname];
+    } else if(this.name.fname.length ==0 && this.name.lname.length !=0){
+      sql = "INSERT INTO people (lastname) VALUES (?)";
+      param = [this.name.lname];
+    } else{
+      return;
+    }
     this.sqlite.create({
       name: 'test.db',
       location: 'default'
@@ -49,7 +48,7 @@ export class HomePage {
       })
       .catch(e => console.log(e));
     })
-  .catch(e => console.log(e));
+    .catch(e => console.log(e));
   }
   public refresh() {
     this.sqlite.create({
@@ -88,60 +87,60 @@ export class HomePage {
 
 
 
-public  editName(id) {
-  let prompt = this.alertCtrl.create({
-    title: 'Edit Name',
-    message: "Enter the new name",
-    inputs: [
-      {
-        name: 'fname',
-        placeholder: 'firstname'
-      },
-      {
-        name: 'lname',
-        placeholder: 'lastname'
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        handler: data => {
-          console.log('Cancel clicked');
+  public  editName(id) {
+    let prompt = this.alertCtrl.create({
+      title: 'Edit Name',
+      message: "Enter the new name",
+      inputs: [
+        {
+          name: 'fname',
+          placeholder: 'firstname'
+        },
+        {
+          name: 'lname',
+          placeholder: 'lastname'
         }
-      },
-      {
-        text: 'Save',
-        handler: data => {
-          this.sqlite.create({
-            name: 'test.db',
-            location: 'default'
-          })
-          .then((db: SQLiteObject) => {
-            var sql = "";
-            var param =[];
-            if(data.fname.length !=0 && data.lname.length !=0){
-            sql = "update people set firstname = (?), lastname =(?) where id =(?)";
-            param = [data.fname,data.lname,id];
-          } else if(data.fname.length!=0&& data.lname.length ==0){
-            sql = "update people set firstname = (?) where id =(?)";
-            param = [data.fname,id];
-          } else if(data.fname.length ==0 && data.lname.length !=0){
-            sql = "update people set lastname =(?) where id =(?)";
-            param = [data.lname,id];
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
           }
-            db.executeSql(sql, param)
-            .then((data) => {
-              this.refresh();
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.sqlite.create({
+              name: 'test.db',
+              location: 'default'
+            })
+            .then((db: SQLiteObject) => {
+              var sql = "";
+              var param =[];
+              if(data.fname.length !=0 && data.lname.length !=0){
+                sql = "update people set firstname = (?), lastname =(?) where id =(?)";
+                param = [data.fname,data.lname,id];
+              } else if(data.fname.length!=0&& data.lname.length ==0){
+                sql = "update people set firstname = (?) where id =(?)";
+                param = [data.fname,id];
+              } else if(data.fname.length ==0 && data.lname.length !=0){
+                sql = "update people set lastname =(?) where id =(?)";
+                param = [data.lname,id];
+              }
+              db.executeSql(sql, param)
+              .then((data) => {
+                this.refresh();
+              })
+              .catch(e => console.log(e));
             })
             .catch(e => console.log(e));
-          })
-          .catch(e => console.log(e));
+          }
         }
-      }
-    ]
-  });
-  prompt.present();
-}
+      ]
+    });
+    prompt.present();
+  }
 
 
 }
