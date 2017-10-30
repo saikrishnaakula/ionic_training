@@ -75,18 +75,20 @@ export class HomePage {
 
 
 
-  public  editName(id) {
+  public  editName(pfname,plname,id) {
     let prompt = this.alertCtrl.create({
       title: 'Edit Name',
       message: "Enter the new name",
       inputs: [
         {
           name: 'fname',
-          placeholder: 'firstname'
+          placeholder: 'firstname',
+          value: pfname
         },
         {
           name: 'lname',
-          placeholder: 'lastname'
+          placeholder: 'lastname',
+          value: plname
         }
       ],
       buttons: [

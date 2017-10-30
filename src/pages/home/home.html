@@ -34,7 +34,7 @@
         </ion-list-header>
         <ion-item *ngFor="let item of people">
           {{ item.firstname +" "+item.lastname }}
-          <button ion-button clear item-end (tap) = "editName(item.id)" >Edit</button>
+          <button ion-button clear item-end (tap) = "editName(item.firstname,item.lastname,item.id)" >Edit</button>
           <button ion-button clear item-end (tap) = "rmName(item.id)" >Delete</button>
         </ion-item>
       </ion-list>
